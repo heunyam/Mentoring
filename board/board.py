@@ -6,18 +6,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class Post:
-    title: field(default_factory=str)
-    content: field(default_factory=str)
+    title: field()
+    content: field()
 
 
 class Board:
 
     def __init__(self):
-        self.num = 0
         self.posts = []
 
     def post(self, title, content):
-        self.num += 1
 
         post = Post(title, content)
         self.posts.append(post)
@@ -29,25 +27,24 @@ class Board:
             )
 
     def delete_post(self, post_id):
-        if post_id <= self.num:
+        if post_id <= len(self.posts) + 1:
             del self.posts[post_id - 1]
 
-            self.num -= 1
-
-            return 1
+            return True
         else:
-            return 0
+            return False
 
 
 if __name__ == '__main__':
     board = Board()
 
     while True:
-        category = input("글 추가(1) 글 목록(2) 글 삭제(3) 종료(E)> ")
+        category = input("글 추가(1) 글 목록(2) 글 삭제(3) 종료(0)> ")
 
         if category == '1':
             title = input("제목 > ")
             content = input("내용 > ")
+
             board.post(title, content)
 
         elif category == '2':
@@ -55,14 +52,14 @@ if __name__ == '__main__':
 
         elif category == '3':
             board.show_posts()
-            post_id = input("삭제 할 글의 번호 > ")
+            post_id = int(input("삭제 할 글의 번호 > "))
 
-            if board.delete_post(int(post_id)):
+            if board.delete_post(post_id):
                 print("Deleted successfully")
             else:
                 print("No such post")
 
-        elif category == 'E' or category == 'e':
+        elif category == '0':
             break
 
         else:
