@@ -26,4 +26,5 @@ def solution(c, m):
 
 
 if __name__ == '__main__':
-    solution(0.99, 10)
+    c, m = input().split()
+    solution(float(c), float(m))
