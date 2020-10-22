@@ -4,7 +4,7 @@ def solution(c, m):
         print("elastic collision")
         return
 
-    elif c == 0:
+    if c == 0:
         print(f"0 bounces\n{m} meters traveled")
         return
 
