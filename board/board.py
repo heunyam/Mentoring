@@ -17,8 +17,7 @@ class Board:
 
     def post(self, title, content):
 
-        post = Post(title, content)
-        self.posts.append(post)
+        self.posts.append(Post(title, content))
 
     def show_posts(self):
         for i, post in enumerate(self.posts):
